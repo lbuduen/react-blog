@@ -1,0 +1,59 @@
+.single-post {
+  flex: 9;
+
+  .wrapper {
+    padding: 20px;
+    padding-right: 0;
+
+    & img {
+      width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+    }
+
+    & h1 {
+      text-align: center;
+      margin: 10px;
+      font-family: 'Lora', serif;
+      font-size: 28px;
+
+      .edit {
+        float: right;
+        font-size: 20px;
+
+        & i {
+          margin-left: 10px;
+          cursor: pointer;
+        }
+
+        & i:first-child {
+          color: teal;
+        }
+        & i:last-child {
+          color: tomato;
+        }
+      }
+    }
+
+    .info {
+      display: flex;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      font-family: 'Varela Round', sans-serif;
+      font-size: 16px;
+      color: #b39656;
+    }
+
+    .description {
+      color: #666;
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    .description::first-letter {
+      margin-left: 20px;
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+}

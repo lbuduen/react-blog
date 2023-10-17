@@ -1,5 +1,6 @@
 import './topbar.css'
 import profile from '../../assets/profile.png'
+import { Link } from 'react-router-dom'
 
 export default function TopBar() {
   return (
@@ -10,17 +11,17 @@ export default function TopBar() {
         <i className="top-icon fa-brands fa-square-pinterest"></i>
         <i className="top-icon fa-brands fa-square-instagram"></i>
       </div>
-      <div className="top-center">
+      <nav className="top-center">
         <ul className="top-list">
-          <li className="top-list-item">Home</li>
+          <li className="top-list-item"><Link to="/">Home</Link></li>
           <li className="top-list-item">About</li>
           <li className="top-list-item">Contact</li>
-          <li className="top-list-item">Write</li>
+          <li className="top-list-item"><Link to="write">Write</Link></li>
           <li className="top-list-item">Logout</li>
         </ul>
-      </div>
+      </nav>
       <div className="top-right">
-        <img className='top-img' src={profile} alt="" />
+        <Link to='settings'><img className='top-img' src={profile} alt="" /></Link>
         <i className="top-search-icon fa-solid fa-magnifying-glass"></i>
       </div>
     </div>

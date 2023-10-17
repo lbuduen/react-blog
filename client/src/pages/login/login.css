@@ -1,5 +1,5 @@
 .login {
-  height: calc(100vh - 50px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,6 +9,7 @@
 
   & h2 {
     font-size: 50px;
+    font-family: 'Lora', serif;
   }
 
   & form {

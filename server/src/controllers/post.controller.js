@@ -4,7 +4,7 @@ async function createPost(request, reply) {
   try {
     const post = new Post(request.body);
     const res = await post.save();
-    reply.send(res);
+    return reply.send(res);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -15,7 +15,7 @@ async function getAllPosts(request, reply) {
     const posts = await Post.find()
       .populate("username", "username email")
       .populate("categories", "name");
-    reply.send(posts);
+    return reply.send(posts);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -29,7 +29,7 @@ async function getPostById(request, reply) {
     if (!post) {
       reply.status(404).send({ message: "Post with that id not found" });
     }
-    reply.send(post);
+    return reply.send(post);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -38,7 +38,7 @@ async function getPostById(request, reply) {
 async function deletePost(request, reply) {
   try {
     await Post.findByIdAndDelete(request.params.id);
-    reply.status(204).send();
+    return reply.status(204).send();
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -51,7 +51,7 @@ async function updatePost(request, reply) {
     })
       .populate("username", "username email")
       .populate("categories", "name");
-    reply.send(post);
+    return reply.send(post);
   } catch (error) {
     reply.status(500).send(error);
   }

@@ -30,7 +30,7 @@ async function basicAuth(request, reply) {
     .split(":");
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).select("password");
 
     if (!user) {
       return reply.code(401).send({ error: "User not found" });

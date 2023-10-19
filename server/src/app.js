@@ -2,7 +2,6 @@ const fastify = require("fastify")({ logger: true });
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const {apiKeyAuth, basicAuth} = require("./middlewares/auth");
 //connect to DB
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -13,11 +12,12 @@ mongoose
 fastify.register(require("./routes/user.routes"), { prefix: "/api/v1/users" });
 fastify.register(require("./routes/post.routes"), { prefix: "/api/v1/posts" });
 fastify.register(require("./routes/category.routes"), { prefix: "/api/v1/categories" });
+fastify.register(require("./routes/auth.routes"), { prefix: "/api/v1/auth" });
 
 //authentication required for all routes
-// fastify.addHook("preHandler", apiKeyAuth);
-
-fastify.addHook("preHandler", basicAuth);
+// const {apiKeyAuth, basicAuth} = require("./middlewares/auth");
+// fastify.addHook("preHandler", apiKeyAuth);  // secret key
+// fastify.addHook("preHandler", basicAuth);   //basic authentication
 
 //start server
 async function main() {

@@ -3,7 +3,7 @@ const User = require("../models/user.model");
 async function getAllUsers(request, reply) {
   try {
     const users = await User.find();
-    reply.send(users);
+    return reply.send(users);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -12,7 +12,7 @@ async function getAllUsers(request, reply) {
 async function getUserById(request, reply) {
   try {
     const user = await User.findById(request.params.id);
-    reply.send(user);
+    return reply.send(user);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -22,7 +22,7 @@ async function createUser(request, reply) {
   try {
     const user = new User(request.body);
     const res = await user.save();
-    reply.send(res);
+    return reply.send(res);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -33,7 +33,7 @@ async function updateUser(request, reply) {
     const user = await User.findByIdAndUpdate(request.params.id, request.body, {
       new: true,
     });
-    reply.send(user);
+    return reply.send(user);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -42,7 +42,7 @@ async function updateUser(request, reply) {
 async function deleteUser(request, reply) {
   try {
     await User.findByIdAndDelete(request.params.id);
-    reply.status(204).send();
+    return reply.status(204).send();
   } catch (error) {
     reply.status(500).send(error);
   }

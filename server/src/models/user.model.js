@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     profilePictureURL: {
       type: String,
@@ -44,11 +45,11 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.comparePassword = async function (password) {
   const user = this;
   try {
-    return await bcrypt.compare(password, user.password)
+    return await bcrypt.compare(password, user.password);
   } catch (error) {
     console.error(error);
     throw error;
   }
-}
+};
 
 module.exports = mongoose.model("User", userSchema);

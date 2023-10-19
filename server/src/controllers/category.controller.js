@@ -4,7 +4,7 @@ async function createCategory(request, reply) {
   try {
     const cat = new Category(request.body);
     const res = await cat.save();
-    reply.send(res);
+    return reply.send(res);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -13,7 +13,7 @@ async function createCategory(request, reply) {
 async function getAllCategories(request, reply) {
   try {
     const cats = await Category.find();
-    reply.send(cats);
+    return reply.send(cats);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -25,7 +25,7 @@ async function getCategoryById(request, reply) {
     if (!cat) {
       reply.status(404).send({ message: "Category with that id not found" });
     }
-    reply.send(cat);
+    return reply.send(cat);
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -34,7 +34,7 @@ async function getCategoryById(request, reply) {
 async function deleteCategory(request, reply) {
   try {
     await Category.findByIdAndDelete(request.params.id);
-    reply.status(204).send();
+    return reply.status(204).send();
   } catch (error) {
     reply.status(500).send(error);
   }
@@ -49,7 +49,7 @@ async function updateCategory(request, reply) {
         new: true,
       }
     );
-    reply.send(cat);
+    return reply.send(cat);
   } catch (error) {
     reply.status(500).send(error);
   }

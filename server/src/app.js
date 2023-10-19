@@ -1,17 +1,20 @@
+require("dotenv").config();
 const fastify = require("fastify")({ logger: true });
 const mongoose = require("mongoose");
-require("dotenv").config();
 
 //connect to DB
-mongoose
+/* mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => fastify.log.info("Connected to the database"))
   .catch((err) => fastify.log.error(err));
+ */
 
 // import routes
 fastify.register(require("./routes/user.routes"), { prefix: "/api/v1/users" });
 fastify.register(require("./routes/post.routes"), { prefix: "/api/v1/posts" });
-fastify.register(require("./routes/category.routes"), { prefix: "/api/v1/categories" });
+fastify.register(require("./routes/category.routes"), {
+  prefix: "/api/v1/categories",
+});
 fastify.register(require("./routes/auth.routes"), { prefix: "/api/v1/auth" });
 
 //authentication required for all routes

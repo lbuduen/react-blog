@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "node --watch src/app.js"
+    "dev": "node --watch --inspect src/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "fastify": "^4.24.2",
+    "fastify-multer": "^2.0.3",
     "mongoose": "^7.6.3"
   }
 }

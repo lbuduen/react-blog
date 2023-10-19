@@ -1,4 +1,6 @@
 const Post = require("../models/post.model");
+const User = require("../models/user.model");
+const Category = require("../models/category.model");
 
 async function createPost(request, reply) {
   try {
@@ -11,8 +13,26 @@ async function createPost(request, reply) {
 }
 
 async function getAllPosts(request, reply) {
+  const username = request.query.user;
+  const cat = request.query.cat;
+
   try {
-    const posts = await Post.find()
+    const query = {};
+    if (username) {
+      const user = await User.findOne({ username });
+      if (user) {
+        query.username = user._id;
+      }
+    }
+    if (cat) {
+      const category = await Category.findOne({ name: cat });
+      if (category) {
+        query.categories = {
+          $in: [category._id],
+        };
+      }
+    }
+    const posts = await Post.find(query)
       .populate("username", "username email")
       .populate("categories", "name");
     return reply.send(posts);
@@ -57,10 +77,17 @@ async function updatePost(request, reply) {
   }
 }
 
+function uploadPostPicture(request, reply) {
+      // request.file is the `avatar` file
+    // request.body will hold the text fields, if there were any
+    return reply.code(200).send("SUCCESS");
+}
+
 module.exports = {
   createPost,
   getAllPosts,
   getPostById,
   deletePost,
   updatePost,
+  uploadPostPicture
 };
